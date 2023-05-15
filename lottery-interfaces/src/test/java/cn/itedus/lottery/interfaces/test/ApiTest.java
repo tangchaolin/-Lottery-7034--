@@ -2,6 +2,7 @@ package cn.itedus.lottery.interfaces.test;
 
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.po.Activity;
+import cn.itedus.lottery.interfaces.ActivityBooth;
 import com.alibaba.fastjson.JSON;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,7 +47,6 @@ public class ApiTest {
     @Test
     public void queryActivityById() {
         Activity activity= iActivityDao.queryActivityById(100001L);
-
         logger.info(JSON.toJSONString(activity));
 
 
