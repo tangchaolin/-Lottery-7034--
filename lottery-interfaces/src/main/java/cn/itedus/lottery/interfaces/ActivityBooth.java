@@ -12,14 +12,13 @@ import io.netty.util.internal.StringUtil;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
-import org.springframework.stereotype.Component;
+
 
 import javax.annotation.Resource;
 import java.io.Serializable;
 
 
 @Service
-@Component
 public class ActivityBooth implements IActivityBooth {
     @Resource
     private IActivityDao activityDao;

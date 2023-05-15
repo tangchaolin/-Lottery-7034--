@@ -1,5 +1,6 @@
 package cn.itedus.lottery.interfaces.test;
 
+import cn.itedus.lottery.domain.strategy.service.DrawStrategy;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.po.Activity;
 import cn.itedus.lottery.interfaces.ActivityBooth;
@@ -13,7 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.Date;
+import java.security.SecureRandom;
+import java.util.*;
 
 
 @RunWith(SpringRunner.class)
@@ -51,5 +53,72 @@ public class ApiTest {
 
 
     }
+    @Test
+    public void test_idx() {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        int HASH_INCREMENT = 0x61c88647;
+        int hashCode = 0;
+        for (int i = 1; i <= 100; i++) {
+            hashCode = i * HASH_INCREMENT + HASH_INCREMENT;
+            int idx = hashCode & (128 - 1);
+
+            map.merge(idx, 1, Integer::sum);
+
+            System.out.println("斐波那契散列：" + idx + " 普通散列：" + (String.valueOf(i).hashCode() & (128 - 1)));
+        }
+
+        System.out.println(map);
+    }
+
+
+    @Test
+    public void test_strategy() {
+        DrawStrategy drawStrategy=new DrawStrategy();
+
+        SecureRandom random = new SecureRandom();
+
+        int rate =random.nextInt(100);
+
+        List<HashMap<String,String>> strategyList = new ArrayList<>();
+
+        strategyList.add(new HashMap<String,String>() {
+            {
+                put("awardDesc", "一等奖：彩电");
+                put("awardId", "10001");
+                put("awardCount", "3");
+                put("awardRate","20");
+
+            }
+        });
+
+        strategyList.add(new HashMap<String,String>() {
+            {
+                put("awardDesc", "二等奖：冰箱");
+                put("awardId", "10002");
+                put("awardCount", "3");
+                put("awardRate","30");
+
+            }
+        });
+
+        strategyList.add(new HashMap<String,String>() {
+            {
+                put("awardDesc", "三等奖：小米手机");
+                put("awardId", "10003");
+                put("awardCount", "3");
+                put("awardRate","50");
+
+            }
+        });
+
+        drawStrategy.init_rateTuple(strategyList);
+        logger.info("概率为{}",rate);
+        logger.info("您抽中了{}",drawStrategy.randomDraw(rate));
+
+
+    }
+
 
 }
