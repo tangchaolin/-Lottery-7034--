@@ -42,4 +42,7 @@ public interface IDrawAlgorithm {
      */
     String randomDraw(Long strategyId,List<String> excludeAwardIds);
 
+    boolean isExistRateTuple(Long StrategyId);
+
+
 }

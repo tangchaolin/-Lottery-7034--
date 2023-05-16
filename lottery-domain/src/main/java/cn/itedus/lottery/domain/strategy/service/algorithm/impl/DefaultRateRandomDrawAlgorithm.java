@@ -1,6 +1,7 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm.impl;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import org.springframework.stereotype.Component;
@@ -20,11 +21,15 @@ public class DefaultRateRandomDrawAlgorithm extends BaseAlgorithm {
 
         List<AwardRateInfo> differenceAwardRateList = new ArrayList<>();
 
-        List<AwardRateInfo> awardRateIntervalList =new ArrayList<>();
 
-        for (AwardRateInfo info : awardRateIntervalList) {
-            if (excludeAwardIds.contains(info.getAwardId())){
-                continue;
+
+//        List<AwardRateInfo> awardRateIntervalList =;
+
+        for (AwardRateInfo info : awardRateInfoMap.get(strategyId)) {
+            if(!ObjectUtil.isNull(excludeAwardIds)&&!ObjectUtil.isEmpty(excludeAwardIds)) {
+                if (excludeAwardIds.contains(info.getAwardId())) {
+                    continue;
+                }
             }
             differenceAwardRateList.add(info);
 

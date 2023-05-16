@@ -1,7 +1,8 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm;
 
+import cn.itedus.lottery.domain.strategy.model.aggregates.StrategyRich;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
-import cn.itedus.lottery.domain.strategy.model.vo.AwardRateIntervalVal;
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -18,7 +19,7 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
     private final int RATE_TUPLE_LENGHTH=128;
 
 
-    private Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
+    protected Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
 
 
 
@@ -57,4 +58,8 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
         return hashCode & (RATE_TUPLE_LENGHTH - 1);
     }
 
+    @Override
+    public boolean isExistRateTuple(Long StrategyId) {
+        return rateTupleMap.containsKey(StrategyId);
+    }
 }
