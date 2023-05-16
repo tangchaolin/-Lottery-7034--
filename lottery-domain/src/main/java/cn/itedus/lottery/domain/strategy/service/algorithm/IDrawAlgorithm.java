@@ -40,6 +40,6 @@ public interface IDrawAlgorithm {
      * @param strategyId 策略ID
      * @return           中奖结果
      */
-    String randomDraw(Long strategyId);
+    String randomDraw(Long strategyId,List<String> excludeAwardIds);
 
 }

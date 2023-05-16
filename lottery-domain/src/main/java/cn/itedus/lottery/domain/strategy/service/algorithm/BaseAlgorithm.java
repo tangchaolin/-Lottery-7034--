@@ -1,6 +1,7 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm;
 
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.AwardRateIntervalVal;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,10 +18,20 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
     private final int RATE_TUPLE_LENGHTH=128;
 
 
+    private Map<Long, List<AwardRateInfo>> awardRateInfoMap = new ConcurrentHashMap<>();
+
+
+
+
 
 
     @Override
     public void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList) {
+
+        //保存奖品概率信息
+
+        awardRateInfoMap.put(strategyId, awardRateInfoList);
+
         String[] rateTuple = rateTupleMap.computeIfAbsent(strategyId, k -> new String[RATE_TUPLE_LENGHTH]);
 
         int cursorVal =0;

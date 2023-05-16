@@ -37,7 +37,7 @@ public class SpringRunnerTest {
         randomDrawAlgorithm.initRateTuple(100001L,list);
 
         for (int i = 1; i <= 100; i++) {
-            logger.info("我使用抽奖策略为100001L进行抽奖，抽到了一个{}",randomDrawAlgorithm.randomDraw(100001L));
+            logger.info("我使用抽奖策略为100001L进行抽奖，抽到了一个{}",randomDrawAlgorithm.randomDraw(100001L,null));
         }
     }
 
