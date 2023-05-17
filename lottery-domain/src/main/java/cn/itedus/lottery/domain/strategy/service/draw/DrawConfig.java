@@ -1,28 +1,38 @@
 package cn.itedus.lottery.domain.strategy.service.draw;
 
+import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+/*
+ * @description: 加载统一配置信息类
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 public class DrawConfig {
 
-    @Resource(name = "defaultRateRandomDrawAlgorithm")
-    private IDrawAlgorithm defaultRateRandomDrawAlgorithm;
+    @Resource(name = "entiretyRateRandomDrawAlgorithm")
+    private IDrawAlgorithm entiretyRateRandomDrawAlgorithm;
 
     @Resource(name = "singleRateRandomDrawAlgorithm")
     private IDrawAlgorithm singleRateRandomDrawAlgorithm;
 
-    public static Map<Integer, IDrawAlgorithm> drawAlgorithmMap = new ConcurrentHashMap<>();
+    protected static Map<Integer, IDrawAlgorithm> drawAlgorithmGroup = new ConcurrentHashMap<>();
 
 
+
+    /**
+     * 初始化抽奖的配置类。注入了两种抽奖算法。
+     */
     @PostConstruct
     void init() {
-        drawAlgorithmMap.put(1, defaultRateRandomDrawAlgorithm);
-        drawAlgorithmMap.put(2, singleRateRandomDrawAlgorithm);
-
+        drawAlgorithmGroup.put(Constants.StrategeMode.SINGLE.getCode(),singleRateRandomDrawAlgorithm);
+        drawAlgorithmGroup.put(Constants.StrategeMode.ENTIRETY.getCode(), entiretyRateRandomDrawAlgorithm);
     }
 
 

@@ -4,13 +4,13 @@ import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 
 import java.util.List;
 
-/**
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小傅哥(fustack)
- * <p>
- * 抽奖算法接口
+/*
+ * @description: 抽奖算法的接口。
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/16 0016
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+
 public interface IDrawAlgorithm {
 
     /**
@@ -35,14 +35,21 @@ public interface IDrawAlgorithm {
     void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList);
 
     /**
-     * SecureRandom 生成随机数，索引到对应的奖品信息返回结果
-     *
-     * @param strategyId 策略ID
-     * @return           中奖结果
+     * 抽奖算法核心，输入抽奖策略id和要排除的奖品的id，进行抽奖。
+     * @param strategyId
+     * @param excludeAwardIds
+     * @return 中奖的结果，中奖就是奖品的id，未中奖就是“未中奖"
      */
     String randomDraw(Long strategyId,List<String> excludeAwardIds);
 
+    /**
+     * 判断该策略id是否已经初始化。
+     * @param StrategyId
+     * @return
+     */
     boolean isExistRateTuple(Long StrategyId);
+    
+    
 
 
 }

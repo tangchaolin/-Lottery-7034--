@@ -6,25 +6,38 @@ import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.util.List;
-//推荐 单项随机概率抽奖，抽到了一个已经排掉的奖品则未中将。。
+/*
+ * @description: 单项随机抽奖概率，抽到一个已经排除的奖品则未中奖。
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/16 0016
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
+
 @Component("singleRateRandomDrawAlgorithm")
 public class SingleRateRandomDrawAlgorithm extends BaseAlgorithm {
 
-
+    /**
+     * 根据策略id进行抽奖，根据情况传入排除的奖品的id。
+     * @param strategyId
+     * @param excludeAwardIds
+     * @return
+     */
     @Override
     public String randomDraw(Long strategyId, List<String> excludeAwardIds) {
         String[] rateTuple = rateTupleMap.get(strategyId);
         assert rateTuple!=null;
 
         //随机1-100.
-        int random =new SecureRandom().nextInt(100)+1;
+        int random = generateSecureRandomIntCode(100);
         //获取到了idx。
         int idx = hashIdx(random);
+
+        //在rateTuple中寻找awardId。在排除的奖品id里面则未中奖。返回null。
         if ((!ObjectUtil.isNull(excludeAwardIds))&&!(excludeAwardIds.isEmpty())){
             if (excludeAwardIds.contains(rateTuple[idx])){
-                return "未中奖！";}
+                return null;}
         }
-        //返回获取的奖品的id，你很成功哦。
+        //返回获取的奖品的id。
         return rateTuple[idx];
 
     }

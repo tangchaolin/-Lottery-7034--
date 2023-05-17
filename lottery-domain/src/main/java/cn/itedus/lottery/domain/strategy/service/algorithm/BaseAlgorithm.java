@@ -5,10 +5,17 @@ import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 
 
 import java.math.BigDecimal;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+/*
+ * @description: 抽奖算法的基础功能，比如实现了initRateTuple，和isExistRateTuple,并且实现了随机抽奖需要的hashIdx和生成随机数的功能。
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 public abstract class BaseAlgorithm implements IDrawAlgorithm{
 
@@ -58,8 +65,19 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
         return hashCode & (RATE_TUPLE_LENGHTH - 1);
     }
 
+    /**
+     * 判断抽奖的策略id是否已经初始化。
+     * @param StrategyId
+     * @return
+     */
     @Override
     public boolean isExistRateTuple(Long StrategyId) {
         return rateTupleMap.containsKey(StrategyId);
     }
+
+
+    protected int generateSecureRandomIntCode(int bound) {
+        return new SecureRandom().nextInt(bound)+1;
+    }
+
 }

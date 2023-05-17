@@ -5,9 +5,13 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/**
- * 这是抽奖程序的入口。
+/*
+ * @description: LotteryApplication
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+
 @SpringBootApplication
 @Configurable
 @EnableDubbo

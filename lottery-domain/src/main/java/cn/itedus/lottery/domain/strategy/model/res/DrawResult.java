@@ -1,22 +1,40 @@
 package cn.itedus.lottery.domain.strategy.model.res;
 
-public class DrawResult {
+import cn.itedus.lottery.common.Constants;
+import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
 
+public class DrawResult {
+    /**
+     * 用户id
+     */
 
     private String uId;
-
+    /**
+     * 策略id
+     */
     private Long StrategyId;
+    /**
+     * 中奖状态 0 未中奖 1 中奖 2 兜底奖
+     */
+    private Integer drawState= Constants.DrawState.FAIL.getCode();
+    /**
+     * 中奖信息，包含奖品id和奖品名称。
+     */
 
-    private String awardId;
+    private DrawAwardInfo drawAwardInfo;
 
-    private String awardName;
 
-    public DrawResult(String uId, Long strategyId, String awardId, String awardName) {
+    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardInfo drawAwardInfo) {
         this.uId = uId;
-        StrategyId = strategyId;
-        this.awardId = awardId;
-        this.awardName = awardName;
+        this.StrategyId = strategyId;
+        this.drawState = drawState;
+        this.drawAwardInfo = drawAwardInfo;
     }
+
+    public DrawResult() {
+
+    }
+
 
     public String getuId() {
         return uId;
@@ -34,19 +52,19 @@ public class DrawResult {
         StrategyId = strategyId;
     }
 
-    public String getAwardId() {
-        return awardId;
+    public Integer getDrawState() {
+        return drawState;
     }
 
-    public void setAwardId(String awardId) {
-        this.awardId = awardId;
+    public void setDrawState(Integer drawState) {
+        this.drawState = drawState;
     }
 
-    public String getAwardName() {
-        return awardName;
+    public DrawAwardInfo getDrawAwardInfo() {
+        return drawAwardInfo;
     }
 
-    public void setAwardName(String awardName) {
-        this.awardName = awardName;
+    public void setDrawAwardInfo(DrawAwardInfo drawAwardInfo) {
+        this.drawAwardInfo = drawAwardInfo;
     }
 }

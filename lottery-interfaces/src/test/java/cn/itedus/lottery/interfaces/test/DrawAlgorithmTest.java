@@ -1,7 +1,9 @@
 package cn.itedus.lottery.interfaces.test;
 
+import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
+import cn.itedus.lottery.domain.strategy.service.draw.AbstractDrawBase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,11 +24,12 @@ public class DrawAlgorithmTest {
     @Resource(name = "singleRateRandomDrawAlgorithm")
     private IDrawAlgorithm drawAlgorithm;
 
-
+    @Resource(name = "drawExec")
+    private AbstractDrawBase drawExec;
     private Logger logger = LoggerFactory.getLogger(DrawAlgorithmTest.class);
 
 
-    @Before
+    //@Before
     public void init() {
 
         List<AwardRateInfo> list =new ArrayList<>();
@@ -62,5 +65,12 @@ public class DrawAlgorithmTest {
             logger.info(drawAlgorithm.randomDraw(100001L,excludeAward));
         }
 
+    }
+
+
+    @Test
+    public void test_drawExec() {
+
+        drawExec.doDrawExec(new DrawReq("10001",10001L));
     }
 }

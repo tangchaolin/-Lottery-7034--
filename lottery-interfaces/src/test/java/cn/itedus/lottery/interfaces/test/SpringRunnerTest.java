@@ -2,6 +2,7 @@ package cn.itedus.lottery.interfaces.test;
 
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
+import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
@@ -43,11 +44,11 @@ public class SpringRunnerTest {
     @Resource
     IAwardDao awardDao;
 
-    @Resource(name = "defaultRateRandomDrawAlgorithm")
-    private IDrawAlgorithm randomDrawAlgorithm;
-
     @Resource(name = "drawExec")
     IDrawExec drawExec;
+
+    @Resource(name = "singleRateRandomDrawAlgorithm")
+    BaseAlgorithm algorithm;
     @Test
     public void testRandomDrawAlgorithm() {
         List<AwardRateInfo> list = new ArrayList<>();
@@ -55,10 +56,10 @@ public class SpringRunnerTest {
         list.add(new AwardRateInfo("二等奖：华菱空调", new BigDecimal("0.3")));
         list.add(new AwardRateInfo("三等奖:小米手机", new BigDecimal("0.5")));
 
-        randomDrawAlgorithm.initRateTuple(100001L,list);
+        algorithm.initRateTuple(100001L,list);
 
         for (int i = 1; i <= 100; i++) {
-            logger.info("我使用抽奖策略为100001L进行抽奖，抽到了一个{}",randomDrawAlgorithm.randomDraw(100001L,null));
+            logger.info("我使用抽奖策略为100001L进行抽奖，抽到了一个{}",algorithm.randomDraw(100001L,null));
         }
     }
 
@@ -94,6 +95,8 @@ public class SpringRunnerTest {
 
 
     }
+
+
 
 
 
