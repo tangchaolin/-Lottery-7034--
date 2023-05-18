@@ -27,4 +27,9 @@ public class PhysicalGoods extends DistributionBase implements IDistributionGood
 
 
     }
+
+    @Override
+    public Integer getDistributionGoodsName() {
+        return Constants.AwardType.PhysicalGoods.getCode();
+    }
 }

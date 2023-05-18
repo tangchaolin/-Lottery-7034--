@@ -28,4 +28,9 @@ public class CouponGoods extends DistributionBase implements IDistributionGoods 
         return new DistributionRes(req.getuId(), Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
 
     }
+
+    @Override
+    public Integer getDistributionGoodsName() {
+        return Constants.AwardType.CouponGoods.getCode();
+    }
 }
