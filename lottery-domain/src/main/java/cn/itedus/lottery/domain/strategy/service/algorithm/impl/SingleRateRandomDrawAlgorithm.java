@@ -7,10 +7,11 @@ import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 import java.util.List;
-/*
- * @description: 单项随机抽奖概率，抽到一个已经排除的奖品则未中奖。
+/**
+ * @description: 单项随机抽奖概率，抽到一个已经排除的奖品则未中奖。继承自BaseAlgorithm。
  * @author：小林哥，微信：tabc18835
- * @date: 2023/5/16 0016
+ * @date: 2023/5/18 0018
+ * @github: https://github.com/tangchaolin       
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 

@@ -16,6 +16,13 @@ import java.util.concurrent.ConcurrentMap;
  * @date: 2023/5/17 0017
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+/**
+ * @description: 抽奖算法的抽象类，实现了基础的方法，如初始化概率数组，判断是否存在策略id，生成idx，和生成安全的1-100的随机数用于抽奖。
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/18 0018
+ * @github: https://github.com/tangchaolin       
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 public abstract class BaseAlgorithm implements IDrawAlgorithm{
 

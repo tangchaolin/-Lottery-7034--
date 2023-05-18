@@ -12,6 +12,13 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.List;
+/**
+ * @description: 为策略模式提供策略数据支持服务
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/18 0018
+ * @github: https://github.com/tangchaolin       
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 @Component
 public class StrategyRepository implements IStrategyRepository {
