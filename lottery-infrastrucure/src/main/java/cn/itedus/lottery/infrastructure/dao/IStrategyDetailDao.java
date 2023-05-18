@@ -1,5 +1,6 @@
 package cn.itedus.lottery.infrastructure.dao;
 
+import cn.itedus.lottery.domain.strategy.model.vo.StrategyDetailBriefVO;
 import cn.itedus.lottery.infrastructure.po.StrategyDetail;
 import org.apache.ibatis.annotations.Mapper;
 
