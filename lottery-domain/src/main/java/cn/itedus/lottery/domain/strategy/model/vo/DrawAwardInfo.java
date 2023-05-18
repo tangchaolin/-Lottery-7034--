@@ -18,7 +18,23 @@ public class DrawAwardInfo {
      */
     private String awardName;
 
+    /**
+     * 奖品类型   如：Constants.awardType.RedeemCodeGoods.getCode
+     */
+    private Integer awardType;
 
+    /**
+     * 奖品的内容 如奖品的描述，奖品码，sku
+     */
+    private String awardContent;
+
+
+    public DrawAwardInfo(String awardId, String awardName, Integer awardType, String awardContent) {
+        this.awardId = awardId;
+        this.awardName = awardName;
+        this.awardType = awardType;
+        this.awardContent = awardContent;
+    }
 
     public DrawAwardInfo(String awardId, String awardName) {
         this.awardId = awardId;
@@ -39,5 +55,21 @@ public class DrawAwardInfo {
 
     public void setAwardName(String awardName) {
         this.awardName = awardName;
+    }
+
+    public Integer getAwardType() {
+        return awardType;
+    }
+
+    public void setAwardType(Integer awardType) {
+        this.awardType = awardType;
+    }
+
+    public String getAwardContent() {
+        return awardContent;
+    }
+
+    public void setAwardContent(String awardContent) {
+        this.awardContent = awardContent;
     }
 }

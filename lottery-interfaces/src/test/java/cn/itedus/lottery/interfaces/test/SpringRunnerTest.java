@@ -1,7 +1,14 @@
 package cn.itedus.lottery.interfaces.test;
 
+import cn.itedus.lottery.common.Constants;
+import cn.itedus.lottery.domain.award.model.req.GoodsReq;
+import cn.itedus.lottery.domain.award.model.res.DistributionRes;
+import cn.itedus.lottery.domain.award.service.facotory.DistributionGoodsFactory;
+import cn.itedus.lottery.domain.award.service.goods.IDistributionGoods;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
+import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
@@ -25,10 +32,19 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+/*
+ * @description: spirngboot单元测试
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringRunnerTest {
+
+    @Resource
+    private DistributionGoodsFactory distributionGoodsFactory;
 
 
     private Logger logger = LoggerFactory.getLogger(SpringRunnerTest.class);
@@ -92,6 +108,31 @@ public class SpringRunnerTest {
 //            logger.info(JSON.toJSONString(drawExec.doDrawExec(req)));
             drawExec.doDrawExec(req);
         }
+
+
+    }
+
+    @Test
+    public void testDistributionGoods() {
+        //执行抽奖
+        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("小林哥", 10001L));
+
+        //判断抽奖结果
+        if (Constants.DrawState.FAIL.getCode().equals(drawResult.getDrawState())) {
+            logger.info("未中奖，DrawAwardInfo is null");
+            return ;
+        }
+        //封装发奖参数，orderId;2109313442431为模拟id,需要在用户参数领奖活动中生成
+        DrawAwardInfo drawAwardInfo =drawResult.getDrawAwardInfo();
+
+        GoodsReq req = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
+
+        IDistributionGoods distributionGoods = distributionGoodsFactory.getDistributionService(drawAwardInfo.getAwardType());
+
+        DistributionRes distributionRes = distributionGoods.doDistribution(req);
+
+        logger.info(JSON.toJSONString(distributionRes));
+
 
 
     }

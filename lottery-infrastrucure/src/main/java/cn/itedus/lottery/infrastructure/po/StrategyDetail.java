@@ -2,13 +2,13 @@ package cn.itedus.lottery.infrastructure.po;
 
 import java.math.BigDecimal;
 
-/**
- * 博客：https://bugstack.cn - 沉淀、分享、成长，让自己和他人都能有所收获！
- * 公众号：bugstack虫洞栈
- * Create by 小林哥(fustack)
- * <p>
- * 策略明细
+/*
+ * @description: 策略配置
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+
 public class StrategyDetail {
 
 
@@ -26,6 +26,11 @@ public class StrategyDetail {
      * 奖品id
      */
     private String awardId;
+
+    /**
+     * 奖品名称
+     */
+    private String awardName;
 
     /**
      * 奖品库存
@@ -51,6 +56,18 @@ public class StrategyDetail {
      * 修改的时间
      */
     private String updateTime;
+
+    public String getAwardName() {
+        return awardName;
+    }
+
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
+    }
+
+    public void setAwardSurplusCount(Integer awardSurplusCount) {
+        this.awardSurplusCount = awardSurplusCount;
+    }
 
     public String getId() {
         return id;

@@ -10,13 +10,19 @@ import java.util.List;
  * @date: 2023/5/16 0016
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+/*
+ * @description: 策略明细表DAO
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/17 0017
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
+ */
 
 @Mapper
 public interface IStrategyDetailDao {
     /**
-     * 
-     * @param strategyId
-     * @return
+     * 查询策略配置
+     * @param strategyId 策略id
+     * @return 一组与策略id相关的策略明细表，包含了相应的奖品。
      */
     List<StrategyDetail> queryStrategyDetailList(Long strategyId);
 

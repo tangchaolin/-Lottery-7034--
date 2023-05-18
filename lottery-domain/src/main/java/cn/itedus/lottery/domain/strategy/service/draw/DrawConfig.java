@@ -7,10 +7,11 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-/*
+/**
  * @description: 加载统一配置信息类
  * @author：小林哥，微信：tabc18835
- * @date: 2023/5/17 0017
+ * @date: 2023/5/18 0018
+ * @github: https://github.com/tangchaolin       
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 

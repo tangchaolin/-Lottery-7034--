@@ -1,5 +1,6 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm.impl;
 
+import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ public class SingleRateRandomDrawAlgorithm extends BaseAlgorithm {
         int idx = hashIdx(random);
 
         //在rateTuple中寻找awardId。在排除的奖品id里面则未中奖。返回null。
-        if ((!ObjectUtil.isNull(excludeAwardIds))&&!(excludeAwardIds.isEmpty())){
+        if (!ObjectUtil.isNull(excludeAwardIds)&&(!ObjectUtil.isEmpty(excludeAwardIds))){
             if (excludeAwardIds.contains(rateTuple[idx])){
                 return null;}
         }

@@ -5,6 +5,8 @@ import cn.itedus.lottery.infrastructure.po.StrategyDetail;
 
 import java.util.List;
 
+
+
 public class StrategyRich {
     private Long strategyId;
 

@@ -74,10 +74,17 @@ public class Constants{
      * 执行draw 以后返回的DrawResult中将会使用到该枚举。
      */
     public enum DrawState {
+        /**
+         * 未中奖
+         */
         FAIL(0,"未中奖"),
-
+        /**
+         * 中奖
+         */
         SUCCESS(1, "中奖"),
-
+        /**
+         * 兜底奖
+         */
         Cover(2, "兜底奖");
 
         private Integer code;
@@ -105,6 +112,100 @@ public class Constants{
             this.info = info;
         }
     }
+
+    public enum AwardState {
+        /**
+         * 等待发奖
+         */
+        WAIT(0, "等待发奖"),
+        /**
+         * 发奖成功
+         */
+        SUCESS(1, "发奖成功"),
+        /**
+         * 发奖失败
+         */
+        FAILURE(2,"发奖失败");
+
+
+        private Integer code;
+
+        private String info;
+
+        AwardState(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
+    }
+
+
+    public enum AwardType {
+
+        /**
+         * 文字描述
+         */
+        DESC(0, "文字描述"),
+        /**
+         * 兑换码
+         */
+        RedeemCodeGoods(1, "兑换码"),
+
+        /**
+         * 优惠券
+         */
+        CouponGoods(2, "优惠券"),
+
+        /**
+         * 实物奖品
+         */
+        PhysicalGoods(3, "实物奖品");
+
+
+        private Integer code;
+
+        private String info;
+
+        AwardType(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        public Integer getCode() {
+            return code;
+        }
+
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        public String getInfo() {
+            return info;
+        }
+
+        public void setInfo(String info) {
+            this.info = info;
+        }
+        }
+
+
+
+
 
 
 

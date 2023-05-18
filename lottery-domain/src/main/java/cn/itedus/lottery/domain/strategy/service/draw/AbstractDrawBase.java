@@ -89,12 +89,14 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
 
         if (ObjectUtil.isNull(awardId)) {
             logger.info("执行策略抽奖完成【未中奖】，用户：{} 策略ID：{}", uId, strategyId);
+            return new DrawResult(uId, strategyId, Constants.DrawState.FAIL.getCode(), null);
         }
         Award award = queryAwardInfoByAwardId(awardId);
 
+        DrawAwardInfo drawAwardInfo=new DrawAwardInfo(award.getAwardId(),award.getAwardName(),award.getAwardType(),award.getAwardContent());
         logger.info("执行策略中奖已完成【已中奖】，用户：{} 策略id：{} 奖品id：{} 奖品名称：{}",uId,strategyId,award.getAwardId(),award.getAwardName());
 
-        return new DrawResult(uId,strategyId,Constants.DrawState.SUCCESS.getCode(), new DrawAwardInfo(award.getAwardId(),award.getAwardName()));
+        return new DrawResult(uId,strategyId,Constants.DrawState.SUCCESS.getCode(), drawAwardInfo);
 
     }
 
