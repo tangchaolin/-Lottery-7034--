@@ -5,6 +5,7 @@ import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.po.Activity;
 import cn.itedus.lottery.interfaces.ActivityBooth;
 import com.alibaba.fastjson.JSON;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -72,6 +73,11 @@ public class ApiTest {
         System.out.println(map);
     }
 
+    @Test
+    public void test_id() {
+
+        System.out.println(RandomStringUtils.randomNumeric(10));
+    }
 
 
 

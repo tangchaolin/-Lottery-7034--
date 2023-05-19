@@ -207,17 +207,38 @@ public class Constants{
      * 活动状态，1编辑 2.提审 3.撤审 4.通过 5.运行（审核通过后worker扫描状态） 6.拒绝 7.关闭 8.开启
      */
     public  enum ActivityState{
-
+        /**
+         * 编辑状态
+         */
             EDIT(1, "编辑"),
+        /**
+         * 提审状态
+         */
             ARRAIGNMENT(2, "提审"),
+        /**
+         * 撤审状态
+         */
             REVOKE(3, "撤审"),
+        /**
+         * 通过状态
+         */
             PASS(4, "通过"),
+        /**
+         * 活动中状态
+         */
             DOING(5, "运行(活动中)"),
+        /**
+         * 拒绝状态
+         */
             REFUSE(6, "拒绝"),
+        /**
+         * 关闭状态
+         */
             CLOSE(7, "关闭"),
+        /**
+         * 开启状态
+         */
             OPEN(8, "开启");
-
-
 
             private Integer code;
 
@@ -244,7 +265,14 @@ public class Constants{
                 this.info = info;
             }
         }
+    public enum Ids{
 
+        /** 雪花算法 */
+        SnowFlake,
+        ShortCode,
+        RandomNumeric;
+
+    }
 
 
 
