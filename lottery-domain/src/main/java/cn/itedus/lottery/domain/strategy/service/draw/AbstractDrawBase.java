@@ -55,7 +55,7 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
     protected void checkAndInitRateTuple(Long strategyId,Integer strategyMode,List<StrategyDetailBriefVO> strategyDetailList) {
 
         // 非单项概率不必初始化元素
-        if(!Constants.StrategeMode.SINGLE.getCode().equals(strategyMode)){
+        if(!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)){
             return;
         }
 

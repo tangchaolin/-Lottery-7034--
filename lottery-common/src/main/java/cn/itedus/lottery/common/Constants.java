@@ -39,12 +39,12 @@ public class Constants{
      * 单项概率：概率一旦确定，如果某个奖品抽完了，任然有机会抽到，但是一旦抽到该随机数，就是显示未中奖。
      * 总体概率：如果某一个奖品抽完，那么剩下的奖品的概率按照0.2+0.3/0.5的策略重新计算概率值。
      */
-    public enum StrategeMode {
+    public enum StrategyMode {
         SINGLE(1, "单项概率"),
 
         ENTIRETY(2,"总体概率");
 
-        StrategeMode(Integer code, String info) {
+        StrategyMode(Integer code, String info) {
             this.code = code;
             this.info = info;
         }
@@ -201,6 +201,48 @@ public class Constants{
         public void setInfo(String info) {
             this.info = info;
         }
+        }
+
+    /**
+     * 活动状态，1编辑 2.提审 3.撤审 4.通过 5.运行（审核通过后worker扫描状态） 6.拒绝 7.关闭 8.开启
+     */
+    public  enum ActivityState{
+
+            EDIT(1, "编辑"),
+            ARRAIGNMENT(2, "提审"),
+            REVOKE(3, "撤审"),
+            PASS(4, "通过"),
+            DOING(5, "运行(活动中)"),
+            REFUSE(6, "拒绝"),
+            CLOSE(7, "关闭"),
+            OPEN(8, "开启");
+
+
+
+            private Integer code;
+
+            private String info;
+
+            ActivityState(Integer code, String info) {
+                this.code = code;
+                this.info = info;
+            }
+
+            public Integer getCode() {
+                return code;
+            }
+
+            public void setCode(Integer code) {
+                this.code = code;
+            }
+
+            public String getInfo() {
+                return info;
+            }
+
+            public void setInfo(String info) {
+                this.info = info;
+            }
         }
 
 

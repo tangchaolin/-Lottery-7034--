@@ -1,10 +1,11 @@
 package cn.itedus.lottery.infrastructure.po;
 
 import java.util.Date;
-/*
- * @description: 奖品
+/**
+ * @description: 奖品的数量
  * @author：小林哥，微信：tabc18835
- * @date: 2023/5/17 0017
+ * @date: 2023/5/19 0019
+ * @github: https://github.com/tangchaolin       
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 
@@ -15,8 +16,7 @@ public class Award {
     private String awardId;
     //奖品的类型(文字描述、兑换码、优惠券、实物奖励暂无）
     private Integer awardType;
-    //奖品的库存
-    private Integer awardCount;
+
     //奖品的名称
     private String awardName;
 
@@ -52,13 +52,9 @@ public class Award {
         this.awardType = awardType;
     }
 
-    public Integer getAwardCount() {
-        return awardCount;
-    }
 
-    public void setAwardCount(Integer awardCount) {
-        this.awardCount = awardCount;
-    }
+
+
 
     public String getAwardName() {
         return awardName;
