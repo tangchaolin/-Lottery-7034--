@@ -46,6 +46,7 @@ mini-db-router:
       tbCount: 4
       default: db00
       list: db01,db02
+      routerKey: uId
       db00:
         driver-class-name: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://localhost:3306/lottery?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=GMT%2B8
