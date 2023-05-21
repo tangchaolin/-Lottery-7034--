@@ -20,3 +20,4 @@ public class RandomNumeric implements IIdGenerator {
         return Long.parseLong(RandomStringUtils.randomNumeric(11));
     }
 }
+
