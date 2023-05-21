@@ -1,11 +1,13 @@
 package cn.itedus.lottery.infrastructure.po;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
-/*
- * @description: 策略配置
+/**
+ * @description: 策略明细
  * @author：小林哥，微信：tabc18835
- * @date: 2023/5/17 0017
+ * @date: 2023/5/21 0021
+ * @github: https://github.com/tangchaolin       
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 
@@ -15,7 +17,7 @@ public class StrategyDetail {
     /**
      * 自增id
      */
-    private String id;
+    private Long id;
 
     /**
      * 策略id
@@ -50,82 +52,173 @@ public class StrategyDetail {
     /**
      * 创建的时间
      */
-    private String createTime;
+    private Date createTime;
 
     /**
      * 修改的时间
      */
-    private String updateTime;
+    private Date updateTime;
 
-    public String getAwardName() {
-        return awardName;
+    public StrategyDetail() {
     }
 
-    public void setAwardName(String awardName) {
+    public StrategyDetail(Long id, Long strategyId, String awardId, String awardName, String awardCount, Integer awardSurplusCount, BigDecimal awardRate, Date createTime, Date updateTime) {
+        this.id = id;
+        this.strategyId = strategyId;
+        this.awardId = awardId;
         this.awardName = awardName;
-    }
-
-    public void setAwardSurplusCount(Integer awardSurplusCount) {
+        this.awardCount = awardCount;
         this.awardSurplusCount = awardSurplusCount;
+        this.awardRate = awardRate;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
     }
 
-    public String getId() {
+    /**
+     * 获取
+     * @return id
+     */
+    public Long getId() {
         return id;
     }
 
-    public Integer getAwardSurplusCount() {
-        return awardSurplusCount;
-    }
-
-    public void setId(String id) {
+    /**
+     * 设置
+     * @param id
+     */
+    public void setId(Long id) {
         this.id = id;
     }
 
+    /**
+     * 获取
+     * @return strategyId
+     */
     public Long getStrategyId() {
         return strategyId;
     }
 
+    /**
+     * 设置
+     * @param strategyId
+     */
     public void setStrategyId(Long strategyId) {
         this.strategyId = strategyId;
     }
 
+    /**
+     * 获取
+     * @return awardId
+     */
     public String getAwardId() {
         return awardId;
     }
 
+    /**
+     * 设置
+     * @param awardId
+     */
     public void setAwardId(String awardId) {
         this.awardId = awardId;
     }
 
+    /**
+     * 获取
+     * @return awardName
+     */
+    public String getAwardName() {
+        return awardName;
+    }
+
+    /**
+     * 设置
+     * @param awardName
+     */
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
+    }
+
+    /**
+     * 获取
+     * @return awardCount
+     */
     public String getAwardCount() {
         return awardCount;
     }
 
+    /**
+     * 设置
+     * @param awardCount
+     */
     public void setAwardCount(String awardCount) {
         this.awardCount = awardCount;
     }
 
+    /**
+     * 获取
+     * @return awardSurplusCount
+     */
+    public Integer getAwardSurplusCount() {
+        return awardSurplusCount;
+    }
+
+    /**
+     * 设置
+     * @param awardSurplusCount
+     */
+    public void setAwardSurplusCount(Integer awardSurplusCount) {
+        this.awardSurplusCount = awardSurplusCount;
+    }
+
+    /**
+     * 获取
+     * @return awardRate
+     */
     public BigDecimal getAwardRate() {
         return awardRate;
     }
 
+    /**
+     * 设置
+     * @param awardRate
+     */
     public void setAwardRate(BigDecimal awardRate) {
         this.awardRate = awardRate;
     }
 
-    public String getCreateTime() {
+    /**
+     * 获取
+     * @return createTime
+     */
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    /**
+     * 设置
+     * @param createTime
+     */
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
-    public String getUpdateTime() {
+    /**
+     * 获取
+     * @return updateTime
+     */
+    public Date getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(String updateTime) {
+    /**
+     * 设置
+     * @param updateTime
+     */
+    public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String toString() {
+        return "StrategyDetail{id = " + id + ", strategyId = " + strategyId + ", awardId = " + awardId + ", awardName = " + awardName + ", awardCount = " + awardCount + ", awardSurplusCount = " + awardSurplusCount + ", awardRate = " + awardRate + ", createTime = " + createTime + ", updateTime = " + updateTime + "}";
     }
 }
