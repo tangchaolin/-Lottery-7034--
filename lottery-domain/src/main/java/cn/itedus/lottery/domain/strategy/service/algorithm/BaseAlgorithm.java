@@ -1,5 +1,6 @@
 package cn.itedus.lottery.domain.strategy.service.algorithm;
 
+import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.strategy.model.aggregates.StrategyRich;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 
@@ -41,11 +42,18 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
 
 
     @Override
-    public void initRateTuple(Long strategyId, List<AwardRateInfo> awardRateInfoList) {
+    public synchronized void initRateTuple(Long strategyId,Integer strategyMode, List<AwardRateInfo> awardRateInfoList) {
 
+        if (isExist(strategyId)) {
+            return;
+        }
         //保存奖品概率信息
-
         awardRateInfoMap.put(strategyId, awardRateInfoList);
+
+        //非单项概率，不必存入缓存中，因为这部分抽奖算法需要实时处理中奖概率。
+        if (!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)) {
+            return;
+        }
 
         String[] rateTuple = rateTupleMap.computeIfAbsent(strategyId, k -> new String[RATE_TUPLE_LENGHTH]);
 
@@ -78,8 +86,8 @@ public abstract class BaseAlgorithm implements IDrawAlgorithm{
      * @return
      */
     @Override
-    public boolean isExistRateTuple(Long StrategyId) {
-        return rateTupleMap.containsKey(StrategyId);
+    public boolean isExist(Long StrategyId) {
+        return awardRateInfoMap.containsKey(StrategyId);
     }
 
 

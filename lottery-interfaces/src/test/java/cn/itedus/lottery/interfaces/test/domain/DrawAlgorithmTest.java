@@ -1,9 +1,11 @@
 package cn.itedus.lottery.interfaces.test.domain;
 
+import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.AbstractDrawBase;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -28,7 +30,7 @@ public class DrawAlgorithmTest {
     private Logger logger = LoggerFactory.getLogger(DrawAlgorithmTest.class);
 
 
-    //@Before
+    @Before
     public void init() {
 
         List<AwardRateInfo> list =new ArrayList<>();
@@ -43,7 +45,7 @@ public class DrawAlgorithmTest {
 
         list.add(new AwardRateInfo("五等奖: 北京一环内购房五百优惠券", new BigDecimal("0.35")));
 
-        drawAlgorithm.initRateTuple(100001L, list);
+        drawAlgorithm.initRateTuple(100001L, Constants.StrategyMode.SINGLE.getCode(), list);
 //
 //        logger.info(drawAlgorithm.randomDraw(100001L,null));
 

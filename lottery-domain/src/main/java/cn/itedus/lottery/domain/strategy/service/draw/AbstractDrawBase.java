@@ -54,22 +54,22 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
      */
     protected void checkAndInitRateTuple(Long strategyId,Integer strategyMode,List<StrategyDetailBriefVO> strategyDetailList) {
 
-        // 非单项概率不必初始化元素
-        if(!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)){
-            return;
-        }
-
+//        // 非单项概率不必初始化元素
+//        if(!Constants.StrategyMode.SINGLE.getCode().equals(strategyMode)){
+//            return;
+//        }
+        //*根据策略模式，选择相应的抽奖服务。
         BaseAlgorithm drawAlgorithm = (BaseAlgorithm) drawAlgorithmGroup.get(strategyMode);
 
-        boolean isExistRateTuple = drawAlgorithm.isExistRateTuple(strategyId);
+        boolean isExist = drawAlgorithm.isExist(strategyId);
 
-        if (isExistRateTuple){return;}
+        if (isExist){return;}
         List<AwardRateInfo> list = new ArrayList<>(strategyDetailList.size());
         for (StrategyDetailBriefVO strategyDetail : strategyDetailList) {
             list.add(new AwardRateInfo(strategyDetail.getAwardId(), strategyDetail.getAwardRate()));
         }
 
-        drawAlgorithm.initRateTuple(strategyId,list);
+        drawAlgorithm.initRateTuple(strategyId,strategyMode,list);
 
     }
 

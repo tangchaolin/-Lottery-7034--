@@ -72,7 +72,7 @@ public class SpringRunnerTest {
         list.add(new AwardRateInfo("二等奖：华菱空调", new BigDecimal("0.3")));
         list.add(new AwardRateInfo("三等奖:小米手机", new BigDecimal("0.5")));
 
-        algorithm.initRateTuple(100001L,list);
+        algorithm.initRateTuple(100001L,1,list);
 
         for (int i = 1; i <= 100; i++) {
             logger.info("我使用抽奖策略为100001L进行抽奖，抽到了一个{}",algorithm.randomDraw(100001L,null));
