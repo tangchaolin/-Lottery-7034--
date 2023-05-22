@@ -3,11 +3,14 @@ package cn.itedus.lottery.interfaces.test.domain;
 import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.activity.model.aggregates.ActivityConfigRich;
 import cn.itedus.lottery.domain.activity.model.req.ActivityConfigReq;
+import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
+import cn.itedus.lottery.domain.activity.model.res.PartakeResult;
 import cn.itedus.lottery.domain.activity.model.vo.ActivityVO;
 import cn.itedus.lottery.domain.activity.model.vo.AwardVO;
 import cn.itedus.lottery.domain.activity.model.vo.StrategyDetailVO;
 import cn.itedus.lottery.domain.activity.model.vo.StrategyVO;
 import cn.itedus.lottery.domain.activity.service.deploy.IActivityDeploy;
+import cn.itedus.lottery.domain.activity.service.partake.IActivityPartake;
 import cn.itedus.lottery.domain.activity.service.stateflow.IStateHandler;
 import com.alibaba.fastjson.JSON;
 import org.junit.Before;
@@ -37,7 +40,8 @@ public class ActivityTest {
 
     private Logger logger = LoggerFactory.getLogger(ActivityTest.class);
 
-
+    @Resource
+    private IActivityPartake activityPartake;
     @Resource
     private IActivityDeploy activityDeploy;
 
@@ -174,6 +178,13 @@ public class ActivityTest {
         logger.info("审核通过，测试：{}", JSON.toJSONString(stateHandler.checkPass(100001L, Constants.ActivityState.ARRAIGNMENT)));
         logger.info("运行活动，测试：{}", JSON.toJSONString(stateHandler.doing(100001L, Constants.ActivityState.PASS)));
         logger.info("二次提审，测试：{}", JSON.toJSONString(stateHandler.checkPass(100001L, Constants.ActivityState.EDIT)));
+    }
+
+    @Test
+    public void test_activityPartake() {
+        PartakeReq req=new PartakeReq("Ukdli109op811d",100001L,new Date());
+        PartakeResult res = activityPartake.doPartake(req);
+
     }
 
 
