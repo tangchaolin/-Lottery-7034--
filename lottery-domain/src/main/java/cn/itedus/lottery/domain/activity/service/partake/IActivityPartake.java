@@ -1,7 +1,9 @@
 package cn.itedus.lottery.domain.activity.service.partake;
 
+import cn.itedus.lottery.common.Result;
 import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.res.PartakeResult;
+import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
 
 /**
  * @description: 抽奖活动参与接口
@@ -16,5 +18,13 @@ public interface IActivityPartake {
      * TODO：待开发活动参与接口
      */
     PartakeResult doPartake(PartakeReq req);
+
+
+    /**
+     * 保存奖品单
+     * @param drawOrderVO 奖品单
+     * @return 保存结果
+     */
+    Result recordDrawOrder(DrawOrderVO drawOrderVO);
 
 }

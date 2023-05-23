@@ -12,6 +12,7 @@ import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
 import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
+import cn.itedus.lottery.domain.support.ids.IIdGenerator;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.dao.IAwardDao;
 import cn.itedus.lottery.infrastructure.dao.IStrategyDao;
@@ -32,6 +33,7 @@ import java.math.BigDecimal;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 /*
  * @description: spirngboot单元测试
  * @author：小林哥，微信：tabc18835
@@ -46,7 +48,8 @@ public class SpringRunnerTest {
     @Resource
     private DistributionGoodsFactory distributionGoodsFactory;
 
-
+    @Resource
+    private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
     private Logger logger = LoggerFactory.getLogger(SpringRunnerTest.class);
     @Resource
     private IActivityDao activityDao ;
@@ -103,7 +106,7 @@ public class SpringRunnerTest {
 
     @Test
     public void testDrawExec() {
-        DrawReq req = new DrawReq("1", 10001L);
+        DrawReq req = new DrawReq("1", 10001L,String.valueOf(idGeneratorMap.get(Constants.Ids.SnowFlake).nextId()));
         for (int i = 1; i <= 20; i++) {
 //            logger.info(JSON.toJSONString(drawExec.doDrawExec(req)));
             drawExec.doDrawExec(req);
@@ -115,7 +118,7 @@ public class SpringRunnerTest {
     @Test
     public void testDistributionGoods() {
         //执行抽奖
-        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("小林哥", 10001L));
+        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("小林哥", 10001L,String.valueOf(idGeneratorMap.get(Constants.Ids.SnowFlake).nextId())));
 
         //判断抽奖结果
         if (Constants.DrawState.FAIL.getCode().equals(drawResult.getDrawState())) {

@@ -51,12 +51,18 @@ public class UserTakeActivity {
      * 更新日期
      */
     private Date updateTime;
+    /**
+     * 活动单状态 0未使用 1 已使用
+     */
+    private Integer state;
+
+    private Long strategyId;
 
 
     public UserTakeActivity() {
     }
 
-    public UserTakeActivity(Long id, String uId, Long takeId, Long activityId, String activityName, Date takeDate, Integer takeCount, String uuid, Date createTime, Date updateTime) {
+    public UserTakeActivity(Long id, String uId, Long takeId, Long activityId, String activityName, Date takeDate, Integer takeCount, String uuid, Date createTime, Date updateTime, Integer state, Long strategyId) {
         this.id = id;
         this.uId = uId;
         this.takeId = takeId;
@@ -67,6 +73,8 @@ public class UserTakeActivity {
         this.uuid = uuid;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.state = state;
+        this.strategyId = strategyId;
     }
 
     /**
@@ -229,7 +237,39 @@ public class UserTakeActivity {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 获取
+     * @return state
+     */
+    public Integer getState() {
+        return state;
+    }
+
+    /**
+     * 设置
+     * @param state
+     */
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    /**
+     * 获取
+     * @return strategyId
+     */
+    public Long getStrategyId() {
+        return strategyId;
+    }
+
+    /**
+     * 设置
+     * @param strategyId
+     */
+    public void setStrategyId(Long strategyId) {
+        this.strategyId = strategyId;
+    }
+
     public String toString() {
-        return "UserTakeActivity{id = " + id + ", uId = " + uId + ", takeId = " + takeId + ", activityId = " + activityId + ", activityName = " + activityName + ", takeDate = " + takeDate + ", takeCount = " + takeCount + ", uuid = " + uuid + ", createTime = " + createTime + ", updateTime = " + updateTime + "}";
+        return "UserTakeActivity{id = " + id + ", uId = " + uId + ", takeId = " + takeId + ", activityId = " + activityId + ", activityName = " + activityName + ", takeDate = " + takeDate + ", takeCount = " + takeCount + ", uuid = " + uuid + ", createTime = " + createTime + ", updateTime = " + updateTime + ", state = " + state + ", strategyId = " + strategyId + "}";
     }
 }

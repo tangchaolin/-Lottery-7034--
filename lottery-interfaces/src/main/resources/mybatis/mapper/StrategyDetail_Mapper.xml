@@ -17,11 +17,11 @@
 
 
     <select id="queryStrategyDetailList" parameterType="java.lang.Long" resultMap="strategyDetail">
-        SELECT id ,strategy_id,award_id,award_count,award_surplus_count,award_rate,create_time,update_time
+        SELECT id ,strategy_id,award_id,award_name,award_count,award_surplus_count,award_rate,create_time,update_time
         FROM strategy_detail WHERE strategy_id=#{strategyId}
     </select>
 
-    <select id="queryExcludeAwardIdsList" parameterType="java.lang.Long" resultType="java.lang.String">
+    <select id="queryNoStockStrategyAwardList" parameterType="java.lang.Long" resultType="java.lang.String">
         SELECT award_id FROM strategy_detail WHERE strategy_id=#{strategyId} AND award_surplus_count=0
     </select>
 

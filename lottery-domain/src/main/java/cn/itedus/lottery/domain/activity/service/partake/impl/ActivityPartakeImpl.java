@@ -6,6 +6,8 @@ import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.common.Result;
 import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.vo.ActivityBillVO;
+import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
+import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import cn.itedus.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import cn.itedus.lottery.domain.activity.service.partake.BaseActivityPartake;
 import cn.itedus.lottery.domain.activity.service.partake.IActivityPartake;
@@ -33,8 +35,6 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     @Resource
     private IUserTakeActivityRepository userTakeActivityRepository;
 
-    @Resource
-    private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
 
     @Resource
     private TransactionTemplate transactionTemplate;
@@ -81,9 +81,42 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
         }
         return Result.buildSuccessResult();
     }
+    @Override
+    public Result recordDrawOrder(DrawOrderVO drawOrder) {
+        try {
+            dbRouter.doRouter(drawOrder.getUId());
+            return transactionTemplate.execute(transactionStatus -> {
+                try{
+                    int lockCount = userTakeActivityRepository.lockTackActivity(drawOrder.getUId(),
+                            drawOrder.getActivityId(), drawOrder.getTakeId());
+                    if (0 == lockCount) {
+                        transactionStatus.setRollbackOnly();
+                        logger.error("记录中奖单，个人参与活动抽奖已消耗完 activityId:{} uId:{} ",drawOrder.getActivityId(),
+                                drawOrder.getUId());
+                        return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
+                    }
+                    //保存抽奖信息
+                    userTakeActivityRepository.saveUserStrategyExport(drawOrder);
+
+                }catch (DuplicateKeyException e){
+                    transactionStatus.setRollbackOnly();
+                    logger.error("记录中奖单，唯一索引冲突 activityId:{} uId:{}",drawOrder.getActivityId(),drawOrder.getUId()
+                    ,e);
+                }
+                return Result.buildSuccessResult();
+            });
+
+
+        } finally {
+            dbRouter.clear();
+        }
+
+    }
+
+
 
     @Override
-    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill) {
+    protected Result grabActivity(PartakeReq partake, ActivityBillVO bill,Long takeId) {
         try{
             dbRouter.doRouter(partake.getUId());
             return transactionTemplate.execute(transactionStatus -> {
@@ -95,10 +128,10 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
                         logger.error("领取活动，扣减个人已参与次数失败 activityId:{} uId:{}", partake.getActivityId(), partake.getUId());
                         return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
                     }
-                    //插入领取活动信息
-                    Long takeId=idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
+//                    //插入领取活动信息
+//                    Long takeId=idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
 
-                    userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(),bill.getTakeCount(),bill.getUserTakeLeftCount(),partake.getUId(),partake.getPartakeDate(),takeId);
+                    userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(),bill.getStrategyId(),bill.getTakeCount(),bill.getUserTakeLeftCount(),partake.getUId(),partake.getPartakeDate(),takeId);
 
                 }catch (DuplicateKeyException e){
                     transactionStatus.setRollbackOnly();
@@ -114,5 +147,10 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
         }
 
 
+    }
+
+    @Override
+    protected UserTakeActivityVO queryNoConsumedTakeActivityOrder(Long activityId, String uId) {
+        return userTakeActivityRepository.queryNoConsumedTakeActivityOrder(activityId,uId);
     }
 }

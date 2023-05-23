@@ -12,28 +12,66 @@ public class DrawReq {
 
     private Long strategyId;
 
-    public DrawReq() {
+    private String uuid;
 
+    public DrawReq() {
     }
 
-    public DrawReq(String uId, Long strategyId) {
+    public DrawReq(String uId, Long strategyId, String uuid) {
         this.uId = uId;
         this.strategyId = strategyId;
+        this.uuid = uuid;
     }
 
-    public String getuId() {
+    /**
+     * 获取
+     * @return uId
+     */
+    public String getUId() {
         return uId;
     }
 
-    public void setuId(String uId) {
+    /**
+     * 设置
+     * @param uId
+     */
+    public void setUId(String uId) {
         this.uId = uId;
     }
 
+    /**
+     * 获取
+     * @return strategyId
+     */
     public Long getStrategyId() {
         return strategyId;
     }
 
+    /**
+     * 设置
+     * @param strategyId
+     */
     public void setStrategyId(Long strategyId) {
         this.strategyId = strategyId;
+    }
+
+    /**
+     * 获取
+     * @return uuid
+     */
+    public String getUuid() {
+        return uuid;
+    }
+
+    /**
+     * 设置
+     * @param uuid
+     */
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public String toString() {
+        return "DrawReq{uId = " + uId + ", strategyId = " + strategyId + ", uuid = " + uuid + "}";
     }
 }

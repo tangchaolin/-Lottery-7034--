@@ -19,7 +19,7 @@ public class StrategyDetailBriefVO {
 
     private String awardCount;
 
-    private String awardSurplusCount;
+    private Integer awardSurplusCount;
 
     private BigDecimal awardRate;
 
@@ -55,11 +55,11 @@ public class StrategyDetailBriefVO {
         this.awardCount = awardCount;
     }
 
-    public String getAwardSurplusCount() {
+    public Integer getAwardSurplusCount() {
         return awardSurplusCount;
     }
 
-    public void setAwardSurplusCount(String awardSurplusCount) {
+    public void setAwardSurplusCount(Integer awardSurplusCount) {
         this.awardSurplusCount = awardSurplusCount;
     }
 

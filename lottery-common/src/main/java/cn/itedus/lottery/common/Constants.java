@@ -1,20 +1,21 @@
 package cn.itedus.lottery.common;
 
 public class Constants{
-/*
- * @description: 枚举信息的定义
- * @author：小林哥，微信：tabc18835
- * @date: 2023/5/16 0016
- * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
- */
-
+    /**
+     * 枚举信息的定义
+     */
 
     public enum ResponseCode {
+        /**
+         * 相应成功
+         */
         SUCCESS("0000", "成功"),
         UN_ERROR("0001","未知失败"),
         ILLEGAL_PARAMETER("0002","非法参数"),
         INDEX_DUP("0003","主键冲突"),
-        NO_UPDATE("0004","SQL操作无更新");
+        NO_UPDATE("0004","SQL操作无更新"),
+
+        LOSING_DRAW("D001", "未中奖");
 
         private String code;
         private String info;
@@ -41,6 +42,9 @@ public class Constants{
      * 总体概率：如果某一个奖品抽完，那么剩下的奖品的概率按照0.2+0.3/0.5的策略重新计算概率值。
      */
     public enum StrategyMode {
+        /**
+         * 策略mode
+         */
         SINGLE(1, "单项概率"),
 
         ENTIRETY(2,"总体概率");
@@ -268,11 +272,124 @@ public class Constants{
         }
     public enum Ids{
 
-        /** 雪花算法 */
+        /** 各种id生成策略 */
         SnowFlake,
         ShortCode,
         RandomNumeric;
 
+    }
+    public enum TaskState{
+        /**
+         * 活动单状态，使用以及未使用。
+         */
+        NO_USED(0, "未使用"),
+        USED(1, "已使用");
+
+        private Integer code;
+        private String info;
+
+
+        TaskState() {
+        }
+
+        TaskState( Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        /**
+         * 获取
+         * @return code
+         */
+        public Integer getCode() {
+            return code;
+        }
+
+        /**
+         * 设置
+         * @param code
+         */
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        /**
+         * 获取
+         * @return info
+         */
+        public String getInfo() {
+            return info;
+        }
+
+        /**
+         * 设置
+         * @param info
+         */
+        public void setInfo(String info) {
+            this.info = info;
+        }
+
+        public String toString() {
+            return "TaskState{NO_USED = " + NO_USED + ", USED = " + USED + ", code = " + code + ", info = " + info + "}";
+        }
+
+
+    }
+
+    public enum GrantState {
+        /**
+         * 发奖状态 0.初始 1.完成 2.失败
+         */
+        INIT(0,"初始"),
+        COMPLETE(1,"完成"),
+        FAIL(2, "失败");
+
+        private Integer code;
+        private String info;
+
+        GrantState() {
+        }
+
+        GrantState(Integer code, String info) {
+            this.code = code;
+            this.info = info;
+        }
+
+        /**
+         * 获取
+         * @return code
+         */
+        public Integer getCode() {
+            return code;
+        }
+
+        /**
+         * 设置
+         * @param code
+         */
+        public void setCode(Integer code) {
+            this.code = code;
+        }
+
+        /**
+         * 获取
+         * @return info
+         */
+        public String getInfo() {
+            return info;
+        }
+
+        /**
+         * 设置
+         * @param info
+         */
+        public void setInfo(String info) {
+            this.info = info;
+        }
+
+        public String toString() {
+            return "GrantState{code = " + code + ", info = " + info + "}";
+        }
     }
 
 

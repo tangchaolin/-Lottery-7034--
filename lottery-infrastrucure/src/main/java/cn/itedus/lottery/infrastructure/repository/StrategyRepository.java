@@ -71,9 +71,9 @@ public class StrategyRepository implements IStrategyRepository {
 
     @Override
     public List<String> queryNoStockStrategyAwardList(Long strategyId) {
-//        strategyDetailDao.
+        List<String> noStockAwardList = strategyDetailDao.queryNoStockStrategyAwardList(strategyId);
 
-        return null;
+        return noStockAwardList;
     }
 
     @Override

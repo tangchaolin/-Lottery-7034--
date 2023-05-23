@@ -34,6 +34,11 @@ public class PartakeReq {
         this.activityId = activityId;
         this.partakeDate = partakeDate;
     }
+    public PartakeReq(String uId, Long activityId) {
+        this.uId = uId;
+        this.activityId = activityId;
+        this.partakeDate = new Date();
+    }
 
     /**
      * 获取

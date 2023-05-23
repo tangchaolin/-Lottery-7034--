@@ -7,7 +7,7 @@ package cn.itedus.lottery.domain.award.repository;
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 
-public interface IAwardRepository {
+public interface IOrderRepository {
 
     //TODO分库分表中的用户中奖记录操作
 

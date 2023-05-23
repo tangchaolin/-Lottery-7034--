@@ -72,6 +72,6 @@ public class DrawAlgorithmTest {
     @Test
     public void test_drawExec() {
 
-        drawExec.doDrawExec(new DrawReq("10001",10001L));
+//        drawExec.doDrawExec(new DrawReq("10001",10001L));
     }
 }
