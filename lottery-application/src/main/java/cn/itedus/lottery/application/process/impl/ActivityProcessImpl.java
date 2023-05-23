@@ -8,6 +8,7 @@ import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.res.PartakeResult;
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
 import cn.itedus.lottery.domain.activity.service.partake.IActivityPartake;
+import cn.itedus.lottery.domain.rule.service.engine.EngineFilter;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
@@ -35,6 +36,9 @@ public class ActivityProcessImpl implements IActivityProcess {
 
     @Resource
     private Map<Constants.Ids, IIdGenerator> idGeneratorMap;
+
+    @Resource
+    private EngineFilter engineFilter;
 
 
 

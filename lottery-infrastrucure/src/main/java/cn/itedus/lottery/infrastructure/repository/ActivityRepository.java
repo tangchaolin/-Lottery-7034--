@@ -9,6 +9,7 @@ import cn.itedus.lottery.infrastructure.dao.*;
 import cn.itedus.lottery.infrastructure.po.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.Properties;
  * @github: https://github.com/tangchaolin
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-@Component
+@Repository
 public class ActivityRepository implements IActivityRepository {
     @Resource
     IActivityDao activityDao;
