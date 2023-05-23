@@ -108,7 +108,7 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userStrategyExport.setAwardType(drawOrderVO.getAwardType());
         userStrategyExport.setAwardName(drawOrderVO.getAwardName());
         userStrategyExport.setAwardContent(drawOrderVO.getAwardContent());
-        userStrategyExport.setUuid(String.valueOf(drawOrderVO.getOrderId()));
+        userStrategyExport.setUuid(String.valueOf(drawOrderVO.getTakeId()));
 
         userStrategyExportDao.insert(userStrategyExport);
 
