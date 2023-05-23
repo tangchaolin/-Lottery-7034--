@@ -8,9 +8,8 @@ import cn.itedus.lottery.domain.award.service.goods.IDistributionGoods;
 import cn.itedus.lottery.domain.strategy.model.req.DrawReq;
 import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.AwardRateInfo;
-import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
-import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
@@ -30,7 +29,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -126,11 +124,11 @@ public class SpringRunnerTest {
             return ;
         }
         //封装发奖参数，orderId;2109313442431为模拟id,需要在用户参数领奖活动中生成
-        DrawAwardInfo drawAwardInfo =drawResult.getDrawAwardInfo();
+        DrawAwardVO drawAwardVO =drawResult.getDrawAwardInfo();
 
-        GoodsReq req = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
+        GoodsReq req = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardVO.getAwardId(), drawAwardVO.getAwardName(), drawAwardVO.getAwardContent());
 
-        IDistributionGoods distributionGoods = distributionGoodsFactory.getDistributionService(drawAwardInfo.getAwardType());
+        IDistributionGoods distributionGoods = distributionGoodsFactory.getDistributionService(drawAwardVO.getAwardType());
 
         DistributionRes distributionRes = distributionGoods.doDistribution(req);
 

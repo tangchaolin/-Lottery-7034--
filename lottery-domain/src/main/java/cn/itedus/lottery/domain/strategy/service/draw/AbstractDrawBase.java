@@ -10,9 +10,7 @@ import cn.itedus.lottery.domain.strategy.service.algorithm.BaseAlgorithm;
 import cn.itedus.lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.StringUtils;
 
-import javax.xml.stream.events.StartDocument;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,11 +87,11 @@ public abstract class AbstractDrawBase extends DrawStrategySupport implements ID
         }
         AwardBriefVo award = queryAwardInfoByAwardId(awardId);
 
-        DrawAwardInfo drawAwardInfo=new DrawAwardInfo(award.getAwardId(),award.getAwardName(),award.getAwardType(),award.getAwardContent(),strategy.getStrategyMode()
+        DrawAwardVO drawAwardVO =new DrawAwardVO(award.getAwardId(),award.getAwardName(),award.getAwardType(),award.getAwardContent(),strategy.getStrategyMode()
         ,strategy.getGrantType(),strategy.getGrantDate());
         logger.info("执行策略中奖已完成【已中奖】，用户：{} 策略id：{} 奖品id：{} 奖品名称：{}",uId,strategyId,award.getAwardId(),award.getAwardName());
 
-        return new DrawResult(uId,strategyId,Constants.DrawState.SUCCESS.getCode(), drawAwardInfo);
+        return new DrawResult(uId,strategyId,Constants.DrawState.SUCCESS.getCode(), drawAwardVO);
 
     }
 

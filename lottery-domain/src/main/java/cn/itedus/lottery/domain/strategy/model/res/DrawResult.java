@@ -1,7 +1,7 @@
 package cn.itedus.lottery.domain.strategy.model.res;
 
 import cn.itedus.lottery.common.Constants;
-import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardInfo;
+import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 /**
  * @description: 抽奖结果的请求结果包装类
  * @author：小林哥，微信：tabc18835
@@ -28,14 +28,14 @@ public class DrawResult {
      * 中奖信息，包含奖品id和奖品名称。
      */
 
-    private DrawAwardInfo drawAwardInfo;
+    private DrawAwardVO drawAwardVO;
 
 
-    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardInfo drawAwardInfo) {
+    public DrawResult(String uId, Long strategyId, Integer drawState, DrawAwardVO drawAwardVO) {
         this.uId = uId;
         this.StrategyId = strategyId;
         this.drawState = drawState;
-        this.drawAwardInfo = drawAwardInfo;
+        this.drawAwardVO = drawAwardVO;
     }
 
     public DrawResult() {
@@ -67,11 +67,11 @@ public class DrawResult {
         this.drawState = drawState;
     }
 
-    public DrawAwardInfo getDrawAwardInfo() {
-        return drawAwardInfo;
+    public DrawAwardVO getDrawAwardInfo() {
+        return drawAwardVO;
     }
 
-    public void setDrawAwardInfo(DrawAwardInfo drawAwardInfo) {
-        this.drawAwardInfo = drawAwardInfo;
+    public void setDrawAwardInfo(DrawAwardVO drawAwardVO) {
+        this.drawAwardVO = drawAwardVO;
     }
 }

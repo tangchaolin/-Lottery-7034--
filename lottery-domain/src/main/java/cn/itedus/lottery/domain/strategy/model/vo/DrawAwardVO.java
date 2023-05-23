@@ -10,7 +10,7 @@ import java.util.Date;
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 
-public class DrawAwardInfo {
+public class DrawAwardVO {
     /**
      * 奖品id
      */
@@ -44,10 +44,10 @@ public class DrawAwardInfo {
     private Date grantDate;
 
 
-    public DrawAwardInfo() {
+    public DrawAwardVO() {
     }
 
-    public DrawAwardInfo(String awardId, String awardName, Integer awardType, String awardContent, Integer strategyMode, Integer grantType, Date grantDate) {
+    public DrawAwardVO(String awardId, String awardName, Integer awardType, String awardContent, Integer strategyMode, Integer grantType, Date grantDate) {
         this.awardId = awardId;
         this.awardName = awardName;
         this.awardType = awardType;
