@@ -23,6 +23,12 @@ public class DrawReq {
         this.uuid = uuid;
     }
 
+    public DrawReq(String uId, Long strategyId) {
+        this.uId = uId;
+        this.strategyId = strategyId;
+    }
+
+
     /**
      * 获取
      * @return uId

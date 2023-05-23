@@ -122,14 +122,12 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
             return transactionTemplate.execute(transactionStatus -> {
                 try{
                     //扣减个人已参与次数
-                    int updateCount= userTakeActivityRepository.subtractionLeftCount(bill.getActivityId(),bill.getActivityName(),bill.getTakeCount(),bill.getUserTakeLeftCount(),partake.getUId(),partake.getPartakeDate());
+                    int updateCount= userTakeActivityRepository.subtractionLeftCount(bill.getActivityId(),bill.getActivityName(),bill.getTakeCount(),bill.getUserTakeLeftCount(),partake.getUId());
                     if (0 == updateCount) {
                         transactionStatus.setRollbackOnly();
                         logger.error("领取活动，扣减个人已参与次数失败 activityId:{} uId:{}", partake.getActivityId(), partake.getUId());
                         return Result.buildResult(Constants.ResponseCode.NO_UPDATE);
                     }
-//                    //插入领取活动信息
-//                    Long takeId=idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
 
                     userTakeActivityRepository.takeActivity(bill.getActivityId(), bill.getActivityName(),bill.getStrategyId(),bill.getTakeCount(),bill.getUserTakeLeftCount(),partake.getUId(),partake.getPartakeDate(),takeId);
 
