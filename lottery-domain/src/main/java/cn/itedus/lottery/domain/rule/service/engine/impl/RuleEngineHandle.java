@@ -34,7 +34,7 @@ public class RuleEngineHandle extends EngineBase {
         TreeNodeVO treeNodeInfo = engineDecisionMaker(treeRuleRich, matter);
 
         //决策结果
-        return new EngineResult(matter.getUserId(), treeNodeInfo.getTreeId(), treeNodeInfo.getTreeNodeId()
+        return new EngineResult(true,matter.getUserId(), treeNodeInfo.getTreeId(), treeNodeInfo.getTreeNodeId()
         ,treeNodeInfo.getNodeValue());
 
     }

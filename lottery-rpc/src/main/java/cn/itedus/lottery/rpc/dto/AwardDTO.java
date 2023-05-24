@@ -1,65 +1,113 @@
-package cn.itedus.lottery.domain.strategy.model.vo;
+package cn.itedus.lottery.rpc.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @description: 用于抽奖结果包装类使用。
+ * @description: 奖品信息
  * @author：小林哥，微信：tabc18835
- * @date: 2023/5/18 0018
- * @github: https://github.com/tangchaolin       
+ * @date: 2023/5/24 0024
+ * @github: https://github.com/tangchaolin
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
 
-public class DrawAwardVO {
+public class AwardDTO implements Serializable {
+
     /**
-     * 奖品id
+     * 用户ID
+     */
+    private String userId;
+
+    /**
+     * 活动ID
+     */
+    private Long activityId;
+
+    /**
+     * 奖品ID
      */
     private String awardId;
+
+
+    /**
+     * 奖品类型
+     */
+    private Integer awardType;
+
 
     /**
      * 奖品名称
      */
     private String awardName;
 
-    /**
-     * 奖品类型   如：Constants.awardType.RedeemCodeGoods.getCode
-     */
-    private Integer awardType;
 
     /**
-     * 奖品的内容 如奖品的描述，奖品码，sku
+     * 奖品内容
      */
+
     private String awardContent;
+
     /**
-     * 策略方式 1：单项概率 2.总体概率
+     * 策略方式 1:单项概率 2：总体概率
      */
     private Integer strategyMode;
+
     /**
-     * 发放奖品的方式  1.既时 2.定时【含活动结束】 3.人工
+     * 发放奖品方式  1：即时 2：定时 3：人工
      */
     private Integer grantType;
+
     /**
-     * 发奖日期
+     * 发奖时间
      */
     private Date grantDate;
-    /**
-     * 用户ID
-     */
-    private String uId;
 
 
-    public DrawAwardVO() {
+    public AwardDTO() {
     }
 
-    public DrawAwardVO(String awardId, String awardName, Integer awardType, String awardContent, Integer strategyMode, Integer grantType, Date grantDate, String uId) {
+    public AwardDTO(String userId, Long activityId, String awardId, Integer awardType, String awardName, String awardContent, Integer strategyMode, Integer grantType, Date grantDate) {
+        this.userId = userId;
+        this.activityId = activityId;
         this.awardId = awardId;
-        this.awardName = awardName;
         this.awardType = awardType;
+        this.awardName = awardName;
         this.awardContent = awardContent;
         this.strategyMode = strategyMode;
         this.grantType = grantType;
         this.grantDate = grantDate;
-        this.uId = uId;
+    }
+
+    /**
+     * 获取
+     * @return userId
+     */
+    public String getUserId() {
+        return userId;
+    }
+
+    /**
+     * 设置
+     * @param userId
+     */
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    /**
+     * 获取
+     * @return activityId
+     */
+    public Long getActivityId() {
+        return activityId;
+    }
+
+    /**
+     * 设置
+     * @param activityId
+     */
+    public void setActivityId(Long activityId) {
+        this.activityId = activityId;
     }
 
     /**
@@ -80,22 +128,6 @@ public class DrawAwardVO {
 
     /**
      * 获取
-     * @return awardName
-     */
-    public String getAwardName() {
-        return awardName;
-    }
-
-    /**
-     * 设置
-     * @param awardName
-     */
-    public void setAwardName(String awardName) {
-        this.awardName = awardName;
-    }
-
-    /**
-     * 获取
      * @return awardType
      */
     public Integer getAwardType() {
@@ -108,6 +140,22 @@ public class DrawAwardVO {
      */
     public void setAwardType(Integer awardType) {
         this.awardType = awardType;
+    }
+
+    /**
+     * 获取
+     * @return awardName
+     */
+    public String getAwardName() {
+        return awardName;
+    }
+
+    /**
+     * 设置
+     * @param awardName
+     */
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
     }
 
     /**
@@ -174,23 +222,7 @@ public class DrawAwardVO {
         this.grantDate = grantDate;
     }
 
-    /**
-     * 获取
-     * @return uId
-     */
-    public String getuId() {
-        return uId;
-    }
-
-    /**
-     * 设置
-     * @param uId
-     */
-    public void setuId(String uId) {
-        this.uId = uId;
-    }
-
     public String toString() {
-        return "DrawAwardVO{awardId = " + awardId + ", awardName = " + awardName + ", awardType = " + awardType + ", awardContent = " + awardContent + ", strategyMode = " + strategyMode + ", grantType = " + grantType + ", grantDate = " + grantDate + ", uId = " + uId + "}";
+        return "AwardDTO{userId = " + userId + ", activityId = " + activityId + ", awardId = " + awardId + ", awardType = " + awardType + ", awardName = " + awardName + ", awardContent = " + awardContent + ", strategyMode = " + strategyMode + ", grantType = " + grantType + ", grantDate = " + grantDate + "}";
     }
 }

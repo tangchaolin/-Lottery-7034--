@@ -3,9 +3,13 @@ package cn.itedus.lottery.common;
 import java.io.Serializable;
 
 /**
- * 统一返回对象中，Code码、Info描述
- *
+ * @description: 统一返回对象中，Code码、Info描述
+ * @author：小林哥，微信：tabc18835
+ * @date: 2023/5/24 0024
+ * @github: https://github.com/tangchaolin
+ * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
+
 
 public class Result implements Serializable {
 

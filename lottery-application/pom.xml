@@ -11,7 +11,6 @@
 
     <artifactId>lottery-application</artifactId>
     <dependencies>
-
         <dependency>
             <groupId>cn.itedus.lottery</groupId>
             <artifactId>lottery-domain</artifactId>
@@ -19,9 +18,21 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-    <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
+
+    <build>
+        <finalName>lottery-application</finalName>
+        <plugins>
+            <!-- 编译plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <compilerVersion>1.8</compilerVersion>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
