@@ -126,8 +126,7 @@ public class SpringRunnerTest {
         //封装发奖参数，orderId;2109313442431为模拟id,需要在用户参数领奖活动中生成
         DrawAwardVO drawAwardVO =drawResult.getDrawAwardInfo();
 
-        GoodsReq req = new GoodsReq(drawResult.getuId(), "2109313442431", drawAwardVO.getAwardId(), drawAwardVO.getAwardName(), drawAwardVO.getAwardContent());
-
+        GoodsReq req = new GoodsReq(drawResult.getuId(), 3342142342L, drawAwardVO.getAwardId(), drawAwardVO.getAwardName(), drawAwardVO.getAwardContent());
         IDistributionGoods distributionGoods = distributionGoodsFactory.getDistributionService(drawAwardVO.getAwardType());
 
         DistributionRes distributionRes = distributionGoods.doDistribution(req);

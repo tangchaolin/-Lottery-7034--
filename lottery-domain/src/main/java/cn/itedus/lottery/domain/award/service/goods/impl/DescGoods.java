@@ -19,11 +19,11 @@ public class DescGoods extends DistributionBase implements IDistributionGoods {
     @Override
     public DistributionRes doDistribution(GoodsReq req) {
 
-        super.updateUserAwardState(req.getuId(),req.getOrderId(),req.getAwardId(), Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
+        super.updateUserAwardState(req.getUId(),req.getOrderId(),req.getAwardId(), Constants.GrantState.COMPLETE.getCode());
 
 
 
-        return new DistributionRes(req.getuId(),Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
+        return new DistributionRes(req.getUId(),Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
     }
 
     @Override

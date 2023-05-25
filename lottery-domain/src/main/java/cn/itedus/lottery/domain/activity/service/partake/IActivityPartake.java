@@ -15,7 +15,9 @@ import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
 
 public interface IActivityPartake {
     /**
-     * TODO：待开发活动参与接口
+     * 领取活动请求
+     * @param req
+     * @return
      */
     PartakeResult doPartake(PartakeReq req);
 
@@ -26,5 +28,16 @@ public interface IActivityPartake {
      * @return 保存结果
      */
     Result recordDrawOrder(DrawOrderVO drawOrderVO);
+
+    /**
+     * 更新发货单MQ状态
+     * @param uId
+     * @param orderId
+     * @param mqState
+     */
+
+    void updateInvoiceMqState(String uId, Long orderId, Integer mqState);
+
+
 
 }

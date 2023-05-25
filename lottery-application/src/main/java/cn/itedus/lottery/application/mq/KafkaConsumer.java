@@ -26,7 +26,7 @@ import java.util.Optional;
  * @github: https://github.com/tangchaolin
  * @Copyright： - 沉淀、分享、成长，让自己和他人都能有所收获！
  */
-@Component
+//@Component
 public class KafkaConsumer {
     private Logger logger = LoggerFactory.getLogger(KafkaConsumer.class);
 

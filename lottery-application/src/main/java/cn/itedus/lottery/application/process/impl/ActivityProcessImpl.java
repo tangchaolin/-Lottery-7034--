@@ -1,13 +1,17 @@
 package cn.itedus.lottery.application.process.impl;
 
+
+import cn.itedus.lottery.application.mq.producer.Producer;
 import cn.itedus.lottery.application.process.IActivityProcess;
 import cn.itedus.lottery.application.process.req.DrawProcessReq;
 import cn.itedus.lottery.application.process.res.DrawProcessResult;
 import cn.itedus.lottery.application.process.res.RuleQuantificationCrowdResult;
 import cn.itedus.lottery.common.Constants;
+import cn.itedus.lottery.common.Result;
 import cn.itedus.lottery.domain.activity.model.req.PartakeReq;
 import cn.itedus.lottery.domain.activity.model.res.PartakeResult;
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
+import cn.itedus.lottery.domain.activity.model.vo.InvoiceVO;
 import cn.itedus.lottery.domain.activity.service.partake.IActivityPartake;
 import cn.itedus.lottery.domain.rule.model.req.DecisionMatterReq;
 import cn.itedus.lottery.domain.rule.model.res.EngineResult;
@@ -17,7 +21,16 @@ import cn.itedus.lottery.domain.strategy.model.res.DrawResult;
 import cn.itedus.lottery.domain.strategy.model.vo.DrawAwardVO;
 import cn.itedus.lottery.domain.strategy.service.draw.IDrawExec;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
+import com.alibaba.fastjson.JSON;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaAdmin;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
 import java.util.Map;
@@ -43,7 +56,10 @@ public class ActivityProcessImpl implements IActivityProcess {
     @Resource(name = "ruleEngineHandle")
     private EngineFilter engineFilter;
 
+    @Autowired
+    private Producer kafkaProducer;
 
+    private Logger logger = LoggerFactory.getLogger(ActivityProcessImpl.class);
 
 
     @Override
@@ -67,10 +83,34 @@ public class ActivityProcessImpl implements IActivityProcess {
 
 
         //3.结果落库
-        activityPartake.recordDrawOrder(buildDrawOrderVO(req, strategyId, takeId, drawAwardVO));
+        DrawOrderVO drawOrderVO = buildDrawOrderVO(req, strategyId, takeId, drawAwardVO);
+        Result recordResult = activityPartake.recordDrawOrder(drawOrderVO);
+        if (!Constants.ResponseCode.SUCCESS.getCode().equals(recordResult.getCode())) {
+            return new DrawProcessResult(recordResult.getCode(), recordResult.getInfo());
+        }
 
         //4.发送MQ，触发发奖流程
+        InvoiceVO invoiceVO = buildInvoiceVO(drawOrderVO);
+        ListenableFuture<SendResult<String, Object>> future = kafkaProducer.sendLotteryInvoice(invoiceVO);
+        future.addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
+            @Override
+            public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
+                //4.1消息发送完成，记录日志
+                logger.info("消息发送完成,发送消息为：{}", stringObjectSendResult.getProducerRecord().toString());
+                //4.2 消息发送完成，更新数据库表 user_strategy_export.mq_state=1
+                activityPartake.updateInvoiceMqState(invoiceVO.getUId(), invoiceVO.getOrderId(), Constants.MQState.COMPLETE.getCode());
+            }
 
+            @Override
+            public void onFailure(Throwable throwable) {
+                //4.3发送消息失败，记录日志
+                logger.info("消息发送失败，失败信息为：{}",JSON.toJSONString(throwable.getMessage()));
+                //4.2消息发送失败，更新数据库表 user_strategy_export.mq_state=2 【等待定时任务扫码补偿MQ消息】
+                activityPartake.updateInvoiceMqState(invoiceVO.getUId(),invoiceVO.getOrderId(),Constants.MQState.FAIL.getCode());
+            }
+
+
+        });
 
         //5.返回结果
         return new DrawProcessResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo(), drawAwardVO);
@@ -113,6 +153,20 @@ public class ActivityProcessImpl implements IActivityProcess {
         drawOrderVO.setAwardName(drawAwardVO.getAwardName());
         drawOrderVO.setAwardContent(drawAwardVO.getAwardContent());
         return drawOrderVO;
+    }
+
+
+    private InvoiceVO buildInvoiceVO(DrawOrderVO drawOrderVO) {
+        InvoiceVO invoiceVO = new InvoiceVO();
+        invoiceVO.setUId(drawOrderVO.getUId());
+        invoiceVO.setOrderId(drawOrderVO.getOrderId());
+        invoiceVO.setAwardId(drawOrderVO.getAwardId());
+        invoiceVO.setAwardType(drawOrderVO.getAwardType());
+        invoiceVO.setAwardName(drawOrderVO.getAwardName());
+        invoiceVO.setAwardContent(drawOrderVO.getAwardContent());
+        invoiceVO.setShippingAddress(null);
+        invoiceVO.setExtInfo(null);
+        return invoiceVO;
     }
 
 }

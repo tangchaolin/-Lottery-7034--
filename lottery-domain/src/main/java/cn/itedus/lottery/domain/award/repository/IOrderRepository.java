@@ -10,6 +10,7 @@ package cn.itedus.lottery.domain.award.repository;
 public interface IOrderRepository {
 
     //TODO分库分表中的用户中奖记录操作
+    void updateUserAwardState(String uId, Long orderId, String awardId, Integer grantState);
 
 
 }

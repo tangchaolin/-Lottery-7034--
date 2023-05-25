@@ -19,11 +19,11 @@ public class PhysicalGoods extends DistributionBase implements IDistributionGood
     @Override
     public DistributionRes doDistribution(GoodsReq req) {
         //模拟调用实物发奖
-        logger.info("模拟实物发奖 uid :{} awardContent :{}",req.getuId(),req.getAwardContent());
+        logger.info("模拟实物发奖 uid :{} awardContent :{}",req.getUId(),req.getAwardContent());
         //更新用户领奖结果
-        super.updateUserAwardState(req.getuId(),req.getOrderId(),req.getAwardId(), Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
+        super.updateUserAwardState(req.getUId(),req.getOrderId(),req.getAwardId(), Constants.GrantState.COMPLETE.getCode());
 
-        return new DistributionRes(req.getuId(), Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
+        return new DistributionRes(req.getUId(), Constants.AwardState.SUCESS.getCode(), Constants.AwardState.SUCESS.getInfo());
 
 
     }

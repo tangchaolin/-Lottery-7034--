@@ -77,11 +77,13 @@ public class UserStrategyExport {
      * 更新时间
      */
     private Date updateTime;
+    /** 消息发送状态 0：未发送 1：发送成功 2：发送失败 */
+    private Integer MqState;
 
     public UserStrategyExport() {
     }
 
-    public UserStrategyExport(Long id, String uId, Long activityId, Long orderId, Long strategyId, Integer strategyMode, Integer grantType, Date grantDate, Integer grantState, String awardId, Integer awardType, String awardName, String awardContent, String uuid, Date createTime, Date updateTime) {
+    public UserStrategyExport(Long id, String uId, Long activityId, Long orderId, Long strategyId, Integer strategyMode, Integer grantType, Date grantDate, Integer grantState, String awardId, Integer awardType, String awardName, String awardContent, String uuid, Date createTime, Date updateTime, Integer MqState) {
         this.id = id;
         this.uId = uId;
         this.activityId = activityId;
@@ -98,6 +100,7 @@ public class UserStrategyExport {
         this.uuid = uuid;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.MqState = MqState;
     }
 
     /**
@@ -356,7 +359,23 @@ public class UserStrategyExport {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 获取
+     * @return MqState
+     */
+    public Integer getMqState() {
+        return MqState;
+    }
+
+    /**
+     * 设置
+     * @param MqState
+     */
+    public void setMqState(Integer MqState) {
+        this.MqState = MqState;
+    }
+
     public String toString() {
-        return "UserStrategyExport{id = " + id + ", uId = " + uId + ", activityId = " + activityId + ", orderId = " + orderId + ", strategyId = " + strategyId + ", strategyMode = " + strategyMode + ", grantType = " + grantType + ", grantDate = " + grantDate + ", grantState = " + grantState + ", awardId = " + awardId + ", awardType = " + awardType + ", awardName = " + awardName + ", awardContent = " + awardContent + ", uuid = " + uuid + ", createTime = " + createTime + ", updateTime = " + updateTime + "}";
+        return "UserStrategyExport{id = " + id + ", uId = " + uId + ", activityId = " + activityId + ", orderId = " + orderId + ", strategyId = " + strategyId + ", strategyMode = " + strategyMode + ", grantType = " + grantType + ", grantDate = " + grantDate + ", grantState = " + grantState + ", awardId = " + awardId + ", awardType = " + awardType + ", awardName = " + awardName + ", awardContent = " + awardContent + ", uuid = " + uuid + ", createTime = " + createTime + ", updateTime = " + updateTime + ", MqState = " + MqState + "}";
     }
 }
