@@ -11,6 +11,9 @@ import java.util.Date;
  */
 
 public class ActivityVO {
+
+    private Long id;
+
     private Long activityId;
 
     private String activityName;
@@ -34,7 +37,8 @@ public class ActivityVO {
     public ActivityVO() {
     }
 
-    public ActivityVO(Long activityId, String activityName, String activityDesc, Date beginDateTime, Date endDateTime, Integer stockCount, Integer takeCount, Long strategyId, Integer state, String creator) {
+    public ActivityVO(Long id, Long activityId, String activityName, String activityDesc, Date beginDateTime, Date endDateTime, Integer stockCount, Integer takeCount, Long strategyId, Integer state, String creator) {
+        this.id = id;
         this.activityId = activityId;
         this.activityName = activityName;
         this.activityDesc = activityDesc;
@@ -45,6 +49,22 @@ public class ActivityVO {
         this.strategyId = strategyId;
         this.state = state;
         this.creator = creator;
+    }
+
+    /**
+     * 获取
+     * @return id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * 设置
+     * @param id
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 
     /**
@@ -208,6 +228,6 @@ public class ActivityVO {
     }
 
     public String toString() {
-        return "ActivityVO{activityId = " + activityId + ", activityName = " + activityName + ", activityDesc = " + activityDesc + ", beginDateTime = " + beginDateTime + ", endDateTime = " + endDateTime + ", stockCount = " + stockCount + ", takeCount = " + takeCount + ", strategyId = " + strategyId + ", state = " + state + ", creator = " + creator + "}";
+        return "ActivityVO{id = " + id + ", activityId = " + activityId + ", activityName = " + activityName + ", activityDesc = " + activityDesc + ", beginDateTime = " + beginDateTime + ", endDateTime = " + endDateTime + ", stockCount = " + stockCount + ", takeCount = " + takeCount + ", strategyId = " + strategyId + ", state = " + state + ", creator = " + creator + "}";
     }
 }

@@ -3,6 +3,8 @@ package cn.itedus.lottery.infrastructure.dao;
 import cn.itedus.lottery.domain.activity.model.vo.AlterStateVO;
 import cn.itedus.lottery.infrastructure.po.Activity;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 /*
  * @description: 活动基础信息表
  * @author：小林哥，微信：tabc18835
@@ -39,6 +41,11 @@ public interface IActivityDao {
      */
     int subtractionActivityStock(Long activityId);
 
-
+    /**
+     * 扫描待处理的活动列表，状态为：通过，活动中。
+     * @param id ID
+     * @return 待处理的活动
+     */
+    List<Activity> scanToDoActivityList(Long id);
 
 }

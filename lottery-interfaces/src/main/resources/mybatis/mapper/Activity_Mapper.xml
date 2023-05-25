@@ -50,4 +50,20 @@
     </update>
 
 
+    <select id="scanToDoActivityList" parameterType="java.lang.Long" resultMap="Activity">
+        SELECT id,activity_id,activity_name,begin_date_time,end_date_time,state,creator FROM
+        activity WHERE
+        <if test="id==0">
+            id>=#{id}
+        </if>
+        <if test="id!=0">
+            id>#{id}
+        </if>
+        AND state in(4,5)
+        ORDER BY ID ASC
+        LIMIT 10
+
+    </select>
+
+
 </mapper>
