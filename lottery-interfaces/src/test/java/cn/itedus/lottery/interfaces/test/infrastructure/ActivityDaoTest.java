@@ -1,4 +1,4 @@
-package cn.itedus.lottery.interfaces.test.dao;
+package cn.itedus.lottery.interfaces.test.infrastructure;
 
 import cn.itedus.lottery.infrastructure.dao.IActivityDao;
 import cn.itedus.lottery.infrastructure.po.Activity;

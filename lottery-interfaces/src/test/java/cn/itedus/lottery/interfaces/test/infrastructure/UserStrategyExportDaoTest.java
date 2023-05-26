@@ -1,4 +1,4 @@
-package cn.itedus.lottery.interfaces.test.dao;
+package cn.itedus.lottery.interfaces.test.infrastructure;
 
 import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.support.ids.IIdGenerator;
