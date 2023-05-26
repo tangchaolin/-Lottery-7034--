@@ -65,6 +65,7 @@ public class LotteryInvoiceListener {
         } catch (Exception e) {
             //发奖环节失败，消息重试，所有环节，发货、更新库，都需要保证幂等。
             logger.error("消费MQ消息，失败 topic：{} message：{}",topic,message.get());
+
             throw e;
         }
 

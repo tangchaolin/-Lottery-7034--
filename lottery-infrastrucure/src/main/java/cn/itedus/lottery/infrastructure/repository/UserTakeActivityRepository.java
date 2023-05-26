@@ -3,6 +3,7 @@ package cn.itedus.lottery.infrastructure.repository;
 import cn.hutool.core.util.ObjectUtil;
 import cn.itedus.lottery.common.Constants;
 import cn.itedus.lottery.domain.activity.model.vo.DrawOrderVO;
+import cn.itedus.lottery.domain.activity.model.vo.InvoiceVO;
 import cn.itedus.lottery.domain.activity.model.vo.UserTakeActivityVO;
 import cn.itedus.lottery.domain.activity.repository.IUserTakeActivityRepository;
 import cn.itedus.lottery.infrastructure.dao.IUserStrategyExportDao;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @description: 用户参与活动仓储
@@ -143,6 +146,31 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userStrategyExport.setUId(uId);
         userStrategyExport.setOrderId(orderId);
         userStrategyExportDao.updateInvoiceMqState(userStrategyExport);
+
+    }
+
+    @Override
+    public List<InvoiceVO> scanInvoiceMqState() {
+        List<UserStrategyExport> userStrategyExportList =userStrategyExportDao.scanInvoiceMqState();
+
+        List<InvoiceVO> invoiceVOList = new ArrayList<>(userStrategyExportList.size());
+
+        for (UserStrategyExport userStrategyExport : userStrategyExportList) {
+            InvoiceVO invoiceVO=new InvoiceVO();
+
+            invoiceVO.setOrderId(userStrategyExport.getOrderId());
+            invoiceVO.setUId(userStrategyExport.getUId());
+            invoiceVO.setAwardId(userStrategyExport.getAwardId());
+            invoiceVO.setAwardType(userStrategyExport.getAwardType());
+            invoiceVO.setAwardName(userStrategyExport.getAwardName());
+            invoiceVO.setAwardContent(userStrategyExport.getAwardContent());
+
+            invoiceVOList.add(invoiceVO);
+
+        }
+
+
+        return invoiceVOList;
 
     }
 }
