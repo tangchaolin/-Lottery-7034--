@@ -34,7 +34,7 @@ public class ActivityProcessTest {
     public void test_doDrawProcess() {
         DrawProcessReq req = new DrawProcessReq();
 
-        req.setUId("tangchaolin");
+        req.setUId("xiaozhang");
         req.setActivityId(100001L);
         DrawProcessResult drawProcessResult = activityProcess.doDrawProcess(req);
 

@@ -32,6 +32,10 @@ public class ActivityBillVO {
      */
     private Date endDateTime;
     /**
+     * 库存
+     */
+    private Integer stockCount;
+    /**
      * 活动库存剩余
      */
     private Integer stockSurplusCount;
@@ -57,12 +61,13 @@ public class ActivityBillVO {
     public ActivityBillVO() {
     }
 
-    public ActivityBillVO(String uId, Long activityId, String activityName, Date beginDateTime, Date endDateTime, Integer stockSurplusCount, Integer state, Long strategyId, Integer takeCount, Integer userTakeLeftCount) {
+    public ActivityBillVO(String uId, Long activityId, String activityName, Date beginDateTime, Date endDateTime, Integer stockCount, Integer stockSurplusCount, Integer state, Long strategyId, Integer takeCount, Integer userTakeLeftCount) {
         this.uId = uId;
         this.activityId = activityId;
         this.activityName = activityName;
         this.beginDateTime = beginDateTime;
         this.endDateTime = endDateTime;
+        this.stockCount = stockCount;
         this.stockSurplusCount = stockSurplusCount;
         this.state = state;
         this.strategyId = strategyId;
@@ -152,6 +157,22 @@ public class ActivityBillVO {
 
     /**
      * 获取
+     * @return stockCount
+     */
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    /**
+     * 设置
+     * @param stockCount
+     */
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    /**
+     * 获取
      * @return stockSurplusCount
      */
     public Integer getStockSurplusCount() {
@@ -231,6 +252,6 @@ public class ActivityBillVO {
     }
 
     public String toString() {
-        return "ActivityBillVO{uId = " + uId + ", activityId = " + activityId + ", activityName = " + activityName + ", beginDateTime = " + beginDateTime + ", endDateTime = " + endDateTime + ", stockSurplusCount = " + stockSurplusCount + ", state = " + state + ", strategyId = " + strategyId + ", takeCount = " + takeCount + ", userTakeLeftCount = " + userTakeLeftCount + "}";
+        return "ActivityBillVO{uId = " + uId + ", activityId = " + activityId + ", activityName = " + activityName + ", beginDateTime = " + beginDateTime + ", endDateTime = " + endDateTime + ", stockCount = " + stockCount + ", stockSurplusCount = " + stockSurplusCount + ", state = " + state + ", strategyId = " + strategyId + ", takeCount = " + takeCount + ", userTakeLeftCount = " + userTakeLeftCount + "}";
     }
 }

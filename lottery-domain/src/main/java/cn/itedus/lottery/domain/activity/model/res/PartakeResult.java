@@ -18,6 +18,10 @@ public class PartakeResult extends Result {
 
     private Long takeId;
 
+    private Integer stockCount;
+
+    private Integer stockSurplusCount;
+
 
     public PartakeResult() {
         super();
@@ -51,7 +55,29 @@ public class PartakeResult extends Result {
         this.takeId = takeId;
     }
 
+    public Integer getStockCount() {
+        return stockCount;
+    }
+
+    public void setStockCount(Integer stockCount) {
+        this.stockCount = stockCount;
+    }
+
+    public Integer getStockSurplusCount() {
+        return stockSurplusCount;
+    }
+
+    public void setStockSurplusCount(Integer stockSurplusCount) {
+        this.stockSurplusCount = stockSurplusCount;
+    }
+
+    @Override
     public String toString() {
-        return "PartakeResult{strategyId = " + strategyId + "}";
+        return "PartakeResult{" +
+                "strategyId=" + strategyId +
+                ", takeId=" + takeId +
+                ", stockCount=" + stockCount +
+                ", stockSurplusCount=" + stockSurplusCount +
+                '}';
     }
 }
